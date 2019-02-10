@@ -15,9 +15,7 @@ ll root(ll x){
   return x;
 }
 
-void join(ll x, ll y){
-  ll rootX = root(M[x]);
-  ll rootY = root(M[y]);
+void join(ll rootX, ll rootY){
   if(size[rootX] >= size[rootY] && rootX != rootY){
     M[rootY] = rootX;
     size[rootX] += size[rootY];
@@ -40,11 +38,13 @@ int main(){
     }
     if(M[b] == 0){
       M[b] = b;
-      size[b] = 1; 
+      size[b] = 1;
     }
-    if(root(M[a]) != root(M[b])){
+    ll rootX = root(M[a]);
+    ll rootY = root(M[b]);
+    if(rootX != rootY){
       count--;
-      join(a, b);
+      join(rootX, rootY);
     }
 
     // std::cout << "ID = " << '\n';
